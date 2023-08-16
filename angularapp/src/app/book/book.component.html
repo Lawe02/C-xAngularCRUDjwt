@@ -1,0 +1,68 @@
+<div class="container mt-4">
+  <button class="btn btn-success mb-2" (click)="showAddForm()">Add Book</button>
+
+  <!-- Add Book Form -->
+  <div *ngIf="isAddFormVisible">
+    <h3>Add New Book</h3>
+    <form (ngSubmit)="addBook()">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="newBook.title" name="title" required>
+      </div>
+      <div class="form-group">
+        <label for="author">Author</label>
+        <input type="text" class="form-control" id="author" [(ngModel)]="newBook.author" name="author" required>
+      </div>
+      <div class="form-group">
+        <label for="publicityDate">Publicity Date</label>
+        <input type="date" class="form-control" id="publicityDate" [(ngModel)]="newBook.publicityDate" name="publicityDate" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Add</button>
+      <button class="btn btn-secondary" (click)="hideAddForm()">Cancel</button>
+    </form>
+  </div>
+  <!-- Display the table of books -->
+  <div *ngIf="!(isAddFormVisible || isUpdateFormVisible)">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Author</th>
+          <th>Published Date</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of books">
+          <td>{{ book.title }}</td>
+          <td>{{ book.author }}</td>
+          <td>{{ book.publicityDate | date:'medium' }}</td>
+          <td>
+            <button class="btn btn-primary" (click)="showUpdateForm(book)">Edit</button>
+            <button class="btn btn-danger" (click)="deleteBook(book.bookId)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Display the update form -->
+  <div *ngIf="isUpdateFormVisible">
+    <h3>Update Book</h3>
+    <form>
+      <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" class="form-control" id="title" [(ngModel)]="selectedBook.title" name="title">
+      </div>
+      <div class="form-group">
+        <label for="author">Author:</label>
+        <input type="text" class="form-control" id="author" [(ngModel)]="selectedBook.author" name="author">
+      </div>
+      <div class="form-group">
+        <label for="publicityDate">Published Date:</label>
+        <input type="date" class="form-control" id="publicityDate" [(ngModel)]="selectedBook.publicityDate" name="publicityDate">
+      </div>
+      <button class="btn btn-primary" (click)="updateBook()">Update</button>
+      <button class="btn btn-secondary" (click)="hideUpdateForm()">Cancel</button>
+    </form>
+  </div>
