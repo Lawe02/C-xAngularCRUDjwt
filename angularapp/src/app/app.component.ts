@@ -10,7 +10,7 @@ import { ThemeService } from './themeService';
 })
 export class AppComponent implements OnInit {
   public isAuthenticated: boolean = false;
-  isDarkTheme: boolean = false;
+  isDarkTheme: boolean | undefined;
 
   constructor(private http: HttpClient, private router: Router, private themeService: ThemeService) { }
 
@@ -50,6 +50,23 @@ export class AppComponent implements OnInit {
       return null;
     }
   }
+
+  checkAuthenticationStatusBool(): boolean {
+    const token = localStorage.getItem('token');
+    if (token) {
+      const tokenExpiration = this.getTokenExpiration(token);
+      const currentTime = new Date().getTime() / 1000;
+      if (tokenExpiration && tokenExpiration > currentTime) {
+        return true;
+      } else {
+        localStorage.removeItem('token');
+        return false; // Remove expired token
+      }
+    } else {
+      return false;
+    }
+  }
+
 
   toggleTheme() {
     this.themeService.toggleTheme();

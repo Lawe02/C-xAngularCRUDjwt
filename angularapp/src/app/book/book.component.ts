@@ -15,6 +15,7 @@ export class BookComponent implements OnInit {
   isAddFormVisible: boolean = false;
   selectedBook: any = {}; // Store the selected book for update
   isDarkTheme: boolean = false;
+  isAuthenticated: boolean = false;
 
 
   newBook: any = {
@@ -23,13 +24,14 @@ export class BookComponent implements OnInit {
     publicityDate: ''
   };
 
-  constructor(private bookService: BookService, private themeService: ThemeService) { }
+  constructor(private bookService: BookService, private themeService: ThemeService, private appService: AppComponent) { }
 
   ngOnInit() {
     this.themeService.isDarkTheme$.subscribe(isDarkTheme => {
       this.isDarkTheme = isDarkTheme;
     });
     this.getBooks();
+    this.isAuthenticated = this.appService.checkAuthenticationStatusBool();
   }
 
   showAddForm() {

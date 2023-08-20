@@ -17,16 +17,14 @@
         <a [ngClass]="{'text-white': isDarkTheme}" class="nav-link" href="/login">Login</a>
       </li>
     </ng-container>
+    <button class="btn btn-dark mb-2" (click)="toggleTheme()">
+      Ändra Tema
+      <i [ngClass]="{'fa-sun': !isDarkTheme, 'fa-moon': isDarkTheme}" class="fa fa-fw"></i>
+    </button>
   </ul>
 </nav>
 <br>
-<button class="btn btn-primary mb-2" (click)="toggleTheme()">Toggle Theme</button>
 
 
 <router-outlet></router-outlet>
-<style>
-  .dark-theme {
-    background-color: black;
-    color: #ffffff;
-  }
-</style>
+

@@ -1,1 +1,1 @@
-[{"BookId":"792c5f23-6d20-4205-9c47-41b45d16cd7a","Title":"Anka","Author":"Garm","PublicityDate":"2023-08-17T00:00:00"}]
+[{"BookId":"792c5f23-6d20-4205-9c47-41b45d16cd7a","Title":"Anka","Author":"Garm","PublicityDate":"2023-08-17T00:00:00"},{"BookId":"63b08086-9207-4683-9738-76892cc4fca3","Title":"dsad","Author":"sadsad","PublicityDate":"2023-08-27T00:00:00"}]
