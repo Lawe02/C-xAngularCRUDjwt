@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BookService } from '../book.service';
+import { AppComponent } from '../app.component';
+import { ThemeService } from '../themeService';
+
 
 @Component({
   selector: 'app-book',
@@ -11,6 +14,8 @@ export class BookComponent implements OnInit {
   isUpdateFormVisible: boolean = false;
   isAddFormVisible: boolean = false;
   selectedBook: any = {}; // Store the selected book for update
+  isDarkTheme: boolean = false;
+
 
   newBook: any = {
     title: '',
@@ -18,9 +23,12 @@ export class BookComponent implements OnInit {
     publicityDate: ''
   };
 
-  constructor(private bookService: BookService) { }
+  constructor(private bookService: BookService, private themeService: ThemeService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.themeService.isDarkTheme$.subscribe(isDarkTheme => {
+      this.isDarkTheme = isDarkTheme;
+    });
     this.getBooks();
   }
 

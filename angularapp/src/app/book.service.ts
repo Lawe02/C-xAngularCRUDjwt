@@ -13,14 +13,10 @@ export class BookService {
   getBooks(): Observable<any> {
     const headers = this.getHeaders();
     return this.http.get(`${this.apiUrl}/Crud`, { headers });
-
   }
 
   createBook(book: any): Observable<any> {
-    const headers = new HttpHeaders({
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${localStorage.getItem('token')}`
-    });
+    const headers = this.getHeaders();
     return this.http.post(`${this.apiUrl}/Crud/Create`, book, { headers });
   }
 

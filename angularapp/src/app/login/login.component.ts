@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
+import { ThemeService } from '../themeService';
 
 @Component({
   selector: 'app-login',
@@ -9,8 +11,15 @@ import { LoginService } from '../login.service';
 export class LoginComponent {
   username: string = '';
   password: string = '';
+  isDarkTheme: boolean = false;
 
-  constructor(private loginService: LoginService) { }
+  constructor(private loginService: LoginService, private router: Router, private themeService: ThemeService) { }
+
+  ngOnInit() {
+    this.themeService.isDarkTheme$.subscribe(isDarkTheme => {
+      this.isDarkTheme = isDarkTheme;
+    });
+  }
 
   onSubmit() {
     this.loginService.login(this.username, this.password).subscribe(
@@ -19,6 +28,7 @@ export class LoginComponent {
         const token = response.token;
         localStorage.setItem('token', token);
         // You can navigate to a protected route here if needed
+        window.location.href = '/';
       },
       error => {
         console.error('Login failed', error);
