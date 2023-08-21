@@ -40,7 +40,7 @@ app.UseHttpsRedirection();
 // Add CORS middleware here
 app.UseCors(builder =>
 {
-    builder.WithOrigins("https://localhost:4200") // Replace with your frontend URL
+    builder.WithOrigins("http://localhost:4200") // Replace with your frontend URL
         .AllowAnyHeader()
         .AllowAnyMethod();
 });
